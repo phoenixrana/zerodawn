@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Power transmission tower -->
+  <g stroke="#00C8F8" stroke-width="1.5" stroke-linecap="round" opacity="0.85">
+    <!-- Main tower body -->
+    <line x1="60" y1="15" x2="60" y2="105"/>
+    <!-- Cross arms -->
+    <line x1="25" y1="30" x2="95" y2="30"/>
+    <line x1="35" y1="55" x2="85" y2="55"/>
+    <!-- Legs -->
+    <line x1="60" y1="75" x2="42" y2="105"/>
+    <line x1="60" y1="75" x2="78" y2="105"/>
+    <!-- Support braces -->
+    <line x1="50" y1="85" x2="70" y2="95"/>
+    <line x1="70" y1="85" x2="50" y2="95"/>
+  </g>
+  <!-- Insulators -->
+  <g fill="none" stroke="#00C8F8" stroke-width="1" opacity="0.5">
+    <circle cx="25" cy="30" r="3"/>
+    <circle cx="95" cy="30" r="3"/>
+    <circle cx="35" cy="55" r="3"/>
+    <circle cx="85" cy="55" r="3"/>
+  </g>
+  <!-- Power lines going off screen -->
+  <g stroke="#00C8F8" stroke-width="0.8" opacity="0.3">
+    <path d="M25 30 Q10 35 0 32" />
+    <path d="M95 30 Q110 35 120 32" />
+    <path d="M35 55 Q15 60 0 57" />
+    <path d="M85 55 Q105 60 120 57" />
+  </g>
+  <!-- Spark/energy indicator -->
+  <circle cx="60" cy="15" r="4" fill="none" stroke="#0A84FF" stroke-width="1" opacity="0.5"/>
+</svg>

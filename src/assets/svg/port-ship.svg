@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Port with ship and containers -->
+  <g stroke="#00C8F8" stroke-width="1.5" stroke-linecap="round" opacity="0.85">
+    <!-- Ship hull -->
+    <path d="M15 72 L25 85 L95 85 L105 72 Z"/>
+    <!-- Ship deck -->
+    <line x1="20" y1="72" x2="100" y2="72"/>
+    <!-- Bridge/cabin -->
+    <rect x="75" y="55" width="18" height="17" rx="2"/>
+    <rect x="79" y="59" width="10" height="6" rx="1" opacity="0.4"/>
+    <!-- Containers on deck -->
+    <rect x="28" y="60" width="14" height="12" rx="1"/>
+    <rect x="44" y="58" width="14" height="14" rx="1"/>
+    <rect x="60" y="62" width="12" height="10" rx="1"/>
+    <!-- Mast -->
+    <line x1="50" y1="58" x2="50" y2="45"/>
+    <!-- Crane -->
+    <line x1="25" y1="72" x2="25" y2="38"/>
+    <line x1="25" y1="38" x2="55" y2="38"/>
+    <line x1="45" y1="38" x2="45" y2="48" stroke-dasharray="2 2"/>
+  </g>
+  <!-- Water -->
+  <g stroke="#00C8F8" stroke-width="0.8" opacity="0.2">
+    <path d="M5 90 Q15 87 25 90 Q35 93 45 90 Q55 87 65 90 Q75 93 85 90 Q95 87 105 90 Q110 92 115 90" fill="none"/>
+    <path d="M5 97 Q15 94 25 97 Q35 100 45 97 Q55 94 65 97 Q75 100 85 97 Q95 94 105 97 Q110 99 115 97" fill="none"/>
+  </g>
+  <!-- Dock/pier -->
+  <g stroke="#00C8F8" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="75" x2="15" y2="75"/>
+    <line x1="105" y1="75" x2="120" y2="75"/>
+    <line x1="8" y1="75" x2="8" y2="100"/>
+    <line x1="112" y1="75" x2="112" y2="100"/>
+  </g>
+  <!-- Navigation light -->
+  <circle cx="50" cy="45" r="3" fill="none" stroke="#0A84FF" stroke-width="1" opacity="0.5"/>
+  <!-- Drone surveillance indicator -->
+  <g opacity="0.4">
+    <circle cx="60" cy="28" r="4" fill="none" stroke="#00C8F8" stroke-width="1"/>
+    <line x1="60" y1="32" x2="50" y2="40" stroke="#00C8F8" stroke-width="0.8" stroke-dasharray="2 2"/>
+    <line x1="60" y1="32" x2="70" y2="42" stroke="#00C8F8" stroke-width="0.8" stroke-dasharray="2 2"/>
+  </g>
+</svg>

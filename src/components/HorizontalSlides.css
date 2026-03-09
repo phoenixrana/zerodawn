@@ -1,0 +1,258 @@
+/* ═══════════════════════════════════════════════════════════════
+   HorizontalSlides
+   Vertical-scroll-driven horizontal card strip.
+
+   Architecture
+   ─────────────
+   .horizontal-slides           — outer wrapper; gets a dynamic height in
+                                  standalone mode so vertical scroll space
+                                  equals the horizontal travel distance.
+   .horizontal-slides__sticky   — position: sticky; top: 0; height: 100vh;
+                                  acts as the visible viewport window.
+   .horizontal-slides__track    — horizontal flex row; translateX is driven
+                                  by --progress (0→1) × --travel-distance.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── outer wrapper ── */
+.horizontal-slides {
+  position: relative;
+  width: 100%;
+  /* height is set inline by the component in standalone mode;
+     in externally-driven mode it collapses to 100% of its parent */
+}
+
+/* ── sticky viewport ── */
+.horizontal-slides__sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  /* flex so the track is vertically centered */
+  display: flex;
+  align-items: center;
+}
+
+/* ── scrolling track ── */
+.horizontal-slides__track {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--hs-gap, 1.5rem);
+
+  /* track is as wide as its content — no wrapping */
+  width: max-content;
+  min-height: 0;
+
+  /* GPU-composited transform only — avoids layout thrash */
+  will-change: transform;
+
+  /* CSS-variable-driven translation:
+       --progress        : 0–1 value from GSAP (set via inline style)
+       --travel-distance : negative px value calculated by the component
+     The multiply() trick is not available in plain CSS, so we rely on
+     GSAP setting --progress and the component computing --travel-distance
+     as a raw px value (already negated), then we use a linear interpolation:
+       translateX(0) at progress=0  →  translateX(--travel-distance) at progress=1
+  */
+  transform: translateX(
+    calc(var(--progress, 0) * 1px * var(--travel-distance-unitless, 0))
+  );
+
+  /*
+    Fallback / transition for tiny viewport shuffles.
+    Keep it very short so it does not fight the GSAP scrub.
+  */
+  transition: transform 80ms linear;
+}
+
+/*
+  NOTE on the CSS transform math
+  ───────────────────────────────
+  CSS custom properties cannot be multiplied with a <length> directly
+  (calc(0.5 * -800px) works, but calc(var(--progress) * var(--travel-distance))
+  does NOT when --travel-distance is a <length> token).
+
+  The component therefore writes TWO variables onto the track element:
+    --travel-distance          e.g. "-800px"   (for any other CSS consumers)
+    --travel-distance-unitless e.g. "-800"      (unitless, for use in calc)
+
+  The transform above multiplies the unitless travel by 1px to restore the
+  length unit, giving: calc(0.5 * 1px * -800) = -400px  ✓
+*/
+
+
+/* ─────────────────────────────────────────────────────────────
+   Child card defaults
+   Children rendered inside HorizontalSlides should use the
+   .hs-card class for consistent sizing and appearance.
+   ───────────────────────────────────────────────────────────── */
+.hs-card {
+  /* each card is a rigid, non-shrinking column */
+  flex: 0 0 auto;
+  width: clamp(280px, 30vw, 420px);
+  height: calc(100vh - 8rem);
+  max-height: 680px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.75rem;
+
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+
+  /* glass card matching the app's dark palette */
+  background: rgba(10, 20, 30, 0.55);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  padding: 2rem 1.75rem;
+  color: #e0e0e0;
+
+  /* subtle lift on hover */
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
+  cursor: default;
+}
+
+.hs-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(0, 200, 248, 0.18);
+  border-color: rgba(0, 200, 248, 0.25);
+}
+
+/* spotlight glow — driven by --mouse-x / --mouse-y (same pattern as App.jsx) */
+.hs-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(0, 200, 248, 0.07) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.hs-card:hover::before {
+  opacity: 1;
+}
+
+/* background image inside a card */
+.hs-card__bg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  opacity: 0.18;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hs-card:hover .hs-card__bg {
+  opacity: 0.28;
+}
+
+/* text layer sits above the bg */
+.hs-card__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hs-card__num {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #00C8F8;
+  font-weight: 600;
+}
+
+.hs-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 200, 248, 0.1);
+  color: #00C8F8;
+  margin-bottom: 0.25rem;
+}
+
+.hs-card__title {
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.hs-card__desc {
+  font-size: clamp(0.78rem, 1vw, 0.9rem);
+  line-height: 1.6;
+  color: rgba(224, 224, 224, 0.75);
+  margin: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Responsive tweaks
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hs-card {
+    width: clamp(240px, 75vw, 320px);
+    height: calc(100vh - 10rem);
+    max-height: 560px;
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hs-card {
+    width: 82vw;
+  }
+
+  .horizontal-slides__track {
+    /* a little left padding so the first card isn't flush against the edge */
+    padding-left: 1rem;
+  }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Reduced motion
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .horizontal-slides__track {
+    transition: none;
+    /* freeze the track in its initial position; the parent section
+       should degrade gracefully (e.g. vertical stacking) */
+    transform: none !important;
+  }
+
+  .hs-card {
+    transition: none;
+  }
+
+  .hs-card:hover {
+    transform: none;
+  }
+}

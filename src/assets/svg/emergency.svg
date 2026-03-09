@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Emergency/public safety -->
+  <g stroke="#00C8F8" stroke-width="1.5" stroke-linecap="round" opacity="0.85">
+    <!-- Shield shape -->
+    <path d="M60 15 L95 30 L95 65 Q95 95 60 108 Q25 95 25 65 L25 30 Z"/>
+    <!-- Inner shield -->
+    <path d="M60 25 L85 37 L85 62 Q85 85 60 96 Q35 85 35 62 L35 37 Z" opacity="0.3"/>
+    <!-- Cross/plus sign (emergency) -->
+    <line x1="60" y1="42" x2="60" y2="78"/>
+    <line x1="42" y1="60" x2="78" y2="60"/>
+  </g>
+  <!-- Alert signal rings -->
+  <g fill="none" stroke="#0A84FF" stroke-width="0.8" opacity="0.3">
+    <circle cx="60" cy="60" r="35"/>
+    <circle cx="60" cy="60" r="42" stroke-dasharray="4 4"/>
+    <circle cx="60" cy="60" r="50" stroke-dasharray="2 4"/>
+  </g>
+  <!-- Drone overhead -->
+  <g opacity="0.5">
+    <circle cx="85" cy="18" r="4" fill="none" stroke="#00C8F8" stroke-width="1"/>
+    <line x1="81" y1="18" x2="89" y2="18" stroke="#00C8F8" stroke-width="0.8"/>
+    <line x1="85" y1="14" x2="85" y2="22" stroke="#00C8F8" stroke-width="0.8"/>
+    <!-- Scan cone -->
+    <path d="M85 22 L75 40" stroke="#00C8F8" stroke-width="0.5" stroke-dasharray="2 2"/>
+    <path d="M85 22 L95 40" stroke="#00C8F8" stroke-width="0.5" stroke-dasharray="2 2"/>
+  </g>
+</svg>

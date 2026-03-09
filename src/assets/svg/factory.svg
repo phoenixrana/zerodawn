@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Industrial facility -->
+  <g stroke="#00C8F8" stroke-width="1.5" stroke-linecap="round" opacity="0.85">
+    <!-- Main building -->
+    <rect x="10" y="50" width="50" height="50" rx="2"/>
+    <!-- Roof saw-tooth -->
+    <path d="M10 50 L30 30 L30 50"/>
+    <path d="M30 50 L50 30 L50 50"/>
+    <path d="M50 50 L60 42 L60 50"/>
+    <!-- Chimney -->
+    <rect x="16" y="25" width="10" height="25"/>
+    <!-- Storage tanks -->
+    <circle cx="85" cy="75" r="18"/>
+    <circle cx="85" cy="75" r="12" opacity="0.3"/>
+    <!-- Tank base -->
+    <line x1="67" y1="93" x2="103" y2="93"/>
+    <!-- Connector pipe -->
+    <line x1="60" y1="65" x2="67" y2="65"/>
+    <!-- Windows -->
+    <rect x="18" y="60" width="8" height="8" rx="1" opacity="0.4"/>
+    <rect x="32" y="60" width="8" height="8" rx="1" opacity="0.4"/>
+    <rect x="46" y="60" width="8" height="8" rx="1" opacity="0.4"/>
+    <rect x="18" y="78" width="8" height="8" rx="1" opacity="0.4"/>
+    <rect x="32" y="78" width="8" height="8" rx="1" opacity="0.4"/>
+  </g>
+  <!-- Smoke -->
+  <g stroke="#00C8F8" stroke-width="0.8" opacity="0.2" fill="none">
+    <path d="M21 25 Q18 15 23 8"/>
+    <path d="M24 25 Q27 13 22 4"/>
+  </g>
+  <!-- Ground -->
+  <line x1="5" y1="100" x2="115" y2="100" stroke="#00C8F8" stroke-width="0.5" opacity="0.2"/>
+  <!-- Drone scanning indicator -->
+  <g stroke="#00C8F8" stroke-width="0.8" opacity="0.4" stroke-dasharray="3 2">
+    <path d="M85 40 L75 55" fill="none"/>
+    <path d="M85 40 L95 55" fill="none"/>
+    <path d="M85 40 L85 52" fill="none"/>
+  </g>
+  <circle cx="85" cy="38" r="4" fill="none" stroke="#00C8F8" stroke-width="1" opacity="0.5"/>
+</svg>

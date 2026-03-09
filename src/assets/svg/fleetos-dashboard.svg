@@ -1,0 +1,259 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <defs>
+    <linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(10,15,28,0.95)"/>
+      <stop offset="100%" stop-color="rgba(6,10,20,0.98)"/>
+    </linearGradient>
+    <linearGradient id="fuelGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#00C8F8"/>
+      <stop offset="100%" stop-color="#0A84FF"/>
+    </linearGradient>
+    <linearGradient id="chartGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="rgba(0,200,248,0)"/>
+      <stop offset="100%" stop-color="rgba(0,200,248,0.15)"/>
+    </linearGradient>
+    <linearGradient id="alertGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(255,180,50,0.15)"/>
+      <stop offset="100%" stop-color="rgba(255,180,50,0)"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="mapClip"><rect x="186" y="146" width="248" height="175" rx="6"/></clipPath>
+  </defs>
+
+  <!-- Main dashboard frame -->
+  <rect x="30" y="20" width="540" height="360" rx="10" fill="url(#screenGrad)" stroke="rgba(0,200,248,0.25)" stroke-width="1"/>
+  <!-- Subtle inner shadow -->
+  <rect x="31" y="21" width="538" height="358" rx="9" fill="none" stroke="rgba(0,200,248,0.05)" stroke-width="0.5"/>
+
+  <!-- Title bar -->
+  <rect x="30" y="20" width="540" height="32" rx="10" fill="rgba(0,200,248,0.04)"/>
+  <rect x="30" y="40" width="540" height="12" fill="rgba(0,200,248,0.04)"/>
+  <!-- Window dots -->
+  <circle cx="50" cy="36" r="4" fill="#FF5F57" opacity="0.6"/>
+  <circle cx="64" cy="36" r="4" fill="#FEBC2E" opacity="0.6"/>
+  <circle cx="78" cy="36" r="4" fill="#28C840" opacity="0.6"/>
+  <!-- Title -->
+  <text x="300" y="40" text-anchor="middle" fill="#00C8F8" font-family="'SF Mono',monospace" font-size="10" font-weight="600" letter-spacing="1.5" opacity="0.8">FLEETOS MISSION CONTROL</text>
+  <!-- Status indicator -->
+  <circle cx="530" cy="36" r="3" fill="#28C840" opacity="0.9" filter="url(#glow)"/>
+  <text x="520" y="39" text-anchor="end" fill="#28C840" font-family="monospace" font-size="7" opacity="0.6">LIVE</text>
+
+  <!-- Left sidebar -->
+  <rect x="36" y="58" width="140" height="314" rx="6" fill="rgba(0,200,248,0.02)" stroke="rgba(0,200,248,0.08)" stroke-width="0.5"/>
+
+  <!-- Sidebar nav items -->
+  <g font-family="'SF Mono',monospace" font-size="8.5">
+    <!-- Active item -->
+    <rect x="42" y="66" width="128" height="26" rx="5" fill="rgba(0,200,248,0.1)" stroke="rgba(0,200,248,0.2)" stroke-width="0.5"/>
+    <rect x="42" y="66" width="3" height="26" rx="1.5" fill="#00C8F8" opacity="0.9"/>
+    <text x="58" y="83" fill="#00C8F8" opacity="0.9">Dashboard</text>
+
+    <!-- Inactive items -->
+    <g fill="rgba(160,180,200,0.4)">
+      <text x="58" y="110">Fleet Map</text>
+      <text x="58" y="133">Active Missions</text>
+      <text x="58" y="156">Safety Checks</text>
+      <text x="58" y="179">H&#x2082; Fuel Logs</text>
+      <text x="58" y="202">Maintenance</text>
+      <text x="58" y="225">Reports</text>
+      <text x="58" y="248">Alerts</text>
+    </g>
+    <!-- Alert badge -->
+    <rect x="140" y="239" width="18" height="14" rx="7" fill="rgba(255,180,50,0.2)" stroke="rgba(255,180,50,0.4)" stroke-width="0.5"/>
+    <text x="149" y="249" text-anchor="middle" fill="#FFB432" font-size="7" opacity="0.9">2</text>
+  </g>
+
+  <!-- Drone fleet mini cards in sidebar -->
+  <g>
+    <rect x="42" y="272" width="128" height="92" rx="5" fill="rgba(0,200,248,0.02)" stroke="rgba(0,200,248,0.06)" stroke-width="0.5"/>
+    <text x="52" y="287" fill="rgba(0,200,248,0.5)" font-family="monospace" font-size="7" letter-spacing="1">FLEET STATUS</text>
+    <!-- Drone 1 -->
+    <circle cx="55" cy="302" r="3" fill="#28C840" opacity="0.9"/>
+    <text x="64" y="305" fill="rgba(200,220,230,0.6)" font-family="monospace" font-size="7">HX-01A  Flying</text>
+    <!-- Drone 2 -->
+    <circle cx="55" cy="318" r="3" fill="#28C840" opacity="0.9"/>
+    <text x="64" y="321" fill="rgba(200,220,230,0.6)" font-family="monospace" font-size="7">HX-01B  Flying</text>
+    <!-- Drone 3 -->
+    <circle cx="55" cy="334" r="3" fill="#FEBC2E" opacity="0.9"/>
+    <text x="64" y="337" fill="rgba(200,220,230,0.6)" font-family="monospace" font-size="7">HX-02A  Refuel</text>
+    <!-- Drone 4 -->
+    <circle cx="55" cy="350" r="3" fill="rgba(100,120,140,0.5)"/>
+    <text x="64" y="353" fill="rgba(200,220,230,0.35)" font-family="monospace" font-size="7">HX-02B  Standby</text>
+  </g>
+
+  <!-- ═══ TOP STATS ROW ═══ -->
+  <g>
+    <!-- Stat 1: Active Drones -->
+    <rect x="186" y="62" width="90" height="72" rx="6" fill="rgba(0,200,248,0.03)" stroke="rgba(0,200,248,0.1)" stroke-width="0.5"/>
+    <text x="196" y="78" fill="rgba(0,200,248,0.45)" font-family="monospace" font-size="7" letter-spacing="0.8">ACTIVE</text>
+    <text x="196" y="110" fill="#00C8F8" font-family="monospace" font-size="28" font-weight="bold" opacity="0.9" filter="url(#glow)">03</text>
+    <text x="230" y="110" fill="rgba(0,200,248,0.35)" font-family="monospace" font-size="10">/04</text>
+    <text x="196" y="125" fill="#28C840" font-family="monospace" font-size="7" opacity="0.7">&#x25B2; All nominal</text>
+
+    <!-- Stat 2: Flight Hours -->
+    <rect x="284" y="62" width="90" height="72" rx="6" fill="rgba(53,184,255,0.03)" stroke="rgba(53,184,255,0.1)" stroke-width="0.5"/>
+    <text x="294" y="78" fill="rgba(53,184,255,0.45)" font-family="monospace" font-size="7" letter-spacing="0.8">FLIGHT HRS</text>
+    <text x="294" y="110" fill="#0A84FF" font-family="monospace" font-size="28" font-weight="bold" opacity="0.9" filter="url(#glow)">6.2</text>
+    <text x="294" y="125" fill="rgba(53,184,255,0.5)" font-family="monospace" font-size="7">today / 8hr target</text>
+    <!-- Mini progress bar -->
+    <rect x="294" y="128" width="70" height="3" rx="1.5" fill="rgba(53,184,255,0.1)"/>
+    <rect x="294" y="128" width="54" height="3" rx="1.5" fill="rgba(53,184,255,0.5)"/>
+
+    <!-- Stat 3: H2 Fuel -->
+    <rect x="382" y="62" width="90" height="72" rx="6" fill="rgba(0,200,248,0.03)" stroke="rgba(0,200,248,0.1)" stroke-width="0.5"/>
+    <text x="392" y="78" fill="rgba(0,200,248,0.45)" font-family="monospace" font-size="7" letter-spacing="0.8">H&#x2082; RESERVE</text>
+    <text x="392" y="110" fill="#00C8F8" font-family="monospace" font-size="28" font-weight="bold" opacity="0.9" filter="url(#glow)">72</text>
+    <text x="424" y="110" fill="rgba(0,200,248,0.4)" font-family="monospace" font-size="10">%</text>
+    <!-- Fuel gauge bar -->
+    <rect x="392" y="118" width="70" height="4" rx="2" fill="rgba(0,200,248,0.08)"/>
+    <rect x="392" y="118" width="50" height="4" rx="2" fill="url(#fuelGrad)" opacity="0.7"/>
+    <text x="392" y="131" fill="rgba(0,200,248,0.4)" font-family="monospace" font-size="7">4 cylinders rdy</text>
+
+    <!-- Stat 4: Missions -->
+    <rect x="480" y="62" width="82" height="72" rx="6" fill="rgba(255,180,50,0.02)" stroke="rgba(255,180,50,0.08)" stroke-width="0.5"/>
+    <text x="490" y="78" fill="rgba(255,180,50,0.45)" font-family="monospace" font-size="7" letter-spacing="0.8">MISSIONS</text>
+    <text x="490" y="110" fill="#FFB432" font-family="monospace" font-size="28" font-weight="bold" opacity="0.85" filter="url(#glow)">09</text>
+    <text x="490" y="125" fill="rgba(255,180,50,0.45)" font-family="monospace" font-size="7">3 active, 6 done</text>
+  </g>
+
+  <!-- ═══ LIVE MAP ═══ -->
+  <rect x="186" y="146" width="248" height="175" rx="6" fill="rgba(8,14,26,0.8)" stroke="rgba(0,200,248,0.1)" stroke-width="0.5"/>
+  <g clip-path="url(#mapClip)">
+    <!-- Terrain grid -->
+    <g stroke="rgba(0,200,248,0.06)" stroke-width="0.5">
+      <line x1="186" y1="172" x2="434" y2="172"/>
+      <line x1="186" y1="198" x2="434" y2="198"/>
+      <line x1="186" y1="224" x2="434" y2="224"/>
+      <line x1="186" y1="250" x2="434" y2="250"/>
+      <line x1="186" y1="276" x2="434" y2="276"/>
+      <line x1="186" y1="302" x2="434" y2="302"/>
+      <line x1="215" y1="160" x2="215" y2="321"/>
+      <line x1="250" y1="160" x2="250" y2="321"/>
+      <line x1="285" y1="160" x2="285" y2="321"/>
+      <line x1="320" y1="160" x2="320" y2="321"/>
+      <line x1="355" y1="160" x2="355" y2="321"/>
+      <line x1="390" y1="160" x2="390" y2="321"/>
+      <line x1="425" y1="160" x2="425" y2="321"/>
+    </g>
+    <!-- Terrain features - subtle pipeline corridor -->
+    <path d="M200 240 Q240 235 280 250 Q320 265 360 255 Q400 245 430 260" fill="none" stroke="rgba(255,180,50,0.12)" stroke-width="12" stroke-linecap="round"/>
+    <path d="M200 240 Q240 235 280 250 Q320 265 360 255 Q400 245 430 260" fill="none" stroke="rgba(255,180,50,0.2)" stroke-width="1" stroke-dasharray="6 4"/>
+    <!-- Geofence zone -->
+    <rect x="230" y="190" width="120" height="80" rx="4" fill="rgba(0,200,248,0.03)" stroke="rgba(0,200,248,0.15)" stroke-width="0.8" stroke-dasharray="4 3"/>
+    <text x="237" y="200" fill="rgba(0,200,248,0.3)" font-family="monospace" font-size="6">ZONE A-1</text>
+  </g>
+
+  <!-- Drone positions with pulsing rings -->
+  <g filter="url(#softGlow)">
+    <!-- Drone 1 - flying, active scan -->
+    <circle cx="270" cy="230" r="12" fill="none" stroke="#00C8F8" stroke-width="0.4" opacity="0.3">
+      <animate attributeName="r" values="12;18;12" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="270" cy="230" r="5" fill="#00C8F8" opacity="0.9"/>
+    <text x="280" y="226" fill="#00C8F8" font-family="monospace" font-size="7" opacity="0.7">HX-01A</text>
+    <text x="280" y="235" fill="rgba(0,200,248,0.4)" font-family="monospace" font-size="6">142m &#x2022; 38km/h</text>
+
+    <!-- Drone 2 - flying, corridor run -->
+    <circle cx="355" cy="252" r="12" fill="none" stroke="#00C8F8" stroke-width="0.4" opacity="0.3">
+      <animate attributeName="r" values="12;18;12" dur="2.3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="2.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="355" cy="252" r="5" fill="#00C8F8" opacity="0.9"/>
+    <text x="365" y="248" fill="#00C8F8" font-family="monospace" font-size="7" opacity="0.7">HX-01B</text>
+    <text x="365" y="257" fill="rgba(0,200,248,0.4)" font-family="monospace" font-size="6">98m &#x2022; 42km/h</text>
+
+    <!-- Drone 3 - refueling (amber) -->
+    <circle cx="230" cy="280" r="5" fill="#FEBC2E" opacity="0.8"/>
+    <text x="240" y="278" fill="#FEBC2E" font-family="monospace" font-size="7" opacity="0.6">HX-02A</text>
+    <text x="240" y="287" fill="rgba(255,180,50,0.35)" font-family="monospace" font-size="6">Refueling 2:18</text>
+  </g>
+
+  <!-- Flight path traces -->
+  <path d="M230 280 Q245 260 270 230" fill="none" stroke="#00C8F8" stroke-width="0.8" opacity="0.2" stroke-dasharray="3 3"/>
+  <path d="M270 230 Q310 240 355 252" fill="none" stroke="rgba(0,200,248,0.15)" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <!-- Planned corridor path -->
+  <path d="M355 252 Q380 248 420 255" fill="none" stroke="rgba(53,184,255,0.2)" stroke-width="1" stroke-dasharray="6 3">
+    <animate attributeName="stroke-dashoffset" values="0;-18" dur="2s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Map label -->
+  <text x="196" y="162" fill="rgba(0,200,248,0.5)" font-family="monospace" font-size="7" letter-spacing="1">LIVE FLEET MAP</text>
+  <!-- Coordinates -->
+  <text x="350" y="316" fill="rgba(0,200,248,0.25)" font-family="monospace" font-size="6" text-anchor="end">17.385&#xb0;N 78.486&#xb0;E</text>
+  <!-- Scale bar -->
+  <line x1="360" y1="313" x2="420" y2="313" stroke="rgba(0,200,248,0.2)" stroke-width="0.5"/>
+  <text x="390" y="311" text-anchor="middle" fill="rgba(0,200,248,0.2)" font-family="monospace" font-size="5">5 km</text>
+
+  <!-- ═══ RIGHT PANEL - MISSION TIMELINE ═══ -->
+  <rect x="444" y="146" width="116" height="108" rx="6" fill="rgba(0,200,248,0.02)" stroke="rgba(0,200,248,0.08)" stroke-width="0.5"/>
+  <text x="454" y="162" fill="rgba(0,200,248,0.45)" font-family="monospace" font-size="7" letter-spacing="0.8">MISSION LOG</text>
+
+  <!-- Timeline entries -->
+  <g font-family="monospace" font-size="6.5">
+    <circle cx="456" cy="177" r="2" fill="#28C840"/>
+    <text x="464" y="179" fill="rgba(200,220,230,0.55)">09:42 HX-01A takeoff</text>
+    <circle cx="456" cy="192" r="2" fill="#28C840"/>
+    <text x="464" y="194" fill="rgba(200,220,230,0.55)">09:38 Refuel complete</text>
+    <circle cx="456" cy="207" r="2" fill="#28C840"/>
+    <text x="464" y="209" fill="rgba(200,220,230,0.55)">09:35 Safety check OK</text>
+    <circle cx="456" cy="222" r="2" fill="#FEBC2E"/>
+    <text x="464" y="224" fill="rgba(255,180,50,0.55)">09:28 Wind alert 18kt</text>
+    <circle cx="456" cy="237" r="2" fill="#28C840"/>
+    <text x="464" y="239" fill="rgba(200,220,230,0.45)">09:22 HX-01B scan ok</text>
+  </g>
+
+  <!-- ═══ RIGHT PANEL - TELEMETRY ═══ -->
+  <rect x="444" y="262" width="116" height="59" rx="6" fill="rgba(53,184,255,0.02)" stroke="rgba(53,184,255,0.08)" stroke-width="0.5"/>
+  <text x="454" y="278" fill="rgba(53,184,255,0.45)" font-family="monospace" font-size="7" letter-spacing="0.8">TELEMETRY HX-01A</text>
+
+  <!-- Telemetry data -->
+  <g font-family="monospace" font-size="7" fill="rgba(200,220,230,0.5)">
+    <text x="454" y="293">ALT  <tspan fill="#0A84FF" opacity="0.8">142m</tspan></text>
+    <text x="510" y="293">SPD  <tspan fill="#0A84FF" opacity="0.8">38km/h</tspan></text>
+    <text x="454" y="307">H&#x2082;   <tspan fill="#00C8F8" opacity="0.8">84%</tspan></text>
+    <text x="510" y="307">BAT  <tspan fill="#28C840" opacity="0.8">96%</tspan></text>
+    <text x="454" y="318">TEMP <tspan fill="rgba(200,220,230,0.6)">42&#xb0;C</tspan></text>
+    <text x="510" y="318">SIG  <tspan fill="#28C840" opacity="0.8">&#x2588;&#x2588;&#x2588;&#x2588;&#x2591;</tspan></text>
+  </g>
+
+  <!-- ═══ BOTTOM BAR - PERFORMANCE CHART ═══ -->
+  <rect x="186" y="330" width="374" height="42" rx="6" fill="rgba(0,200,248,0.02)" stroke="rgba(0,200,248,0.06)" stroke-width="0.5"/>
+  <text x="196" y="344" fill="rgba(0,200,248,0.4)" font-family="monospace" font-size="7" letter-spacing="0.5">DAILY SORTIE HOURS</text>
+  <!-- Mini bar chart -->
+  <g opacity="0.7">
+    <rect x="290" y="356" width="14" height="10" rx="1" fill="rgba(0,200,248,0.15)"/>
+    <rect x="308" y="350" width="14" height="16" rx="1" fill="rgba(0,200,248,0.2)"/>
+    <rect x="326" y="348" width="14" height="18" rx="1" fill="rgba(0,200,248,0.25)"/>
+    <rect x="344" y="344" width="14" height="22" rx="1" fill="rgba(0,200,248,0.3)"/>
+    <rect x="362" y="346" width="14" height="20" rx="1" fill="rgba(0,200,248,0.25)"/>
+    <rect x="380" y="342" width="14" height="24" rx="1" fill="rgba(0,200,248,0.35)"/>
+    <rect x="398" y="338" width="14" height="28" rx="1" fill="rgba(53,184,255,0.4)"/>
+    <rect x="416" y="352" width="14" height="14" rx="1" fill="rgba(0,200,248,0.15)" stroke="rgba(0,200,248,0.15)" stroke-width="0.5" stroke-dasharray="2 1"/>
+  </g>
+  <!-- Chart labels -->
+  <g fill="rgba(0,200,248,0.25)" font-family="monospace" font-size="5.5">
+    <text x="294" y="370" text-anchor="middle">Mon</text>
+    <text x="312" y="370" text-anchor="middle">Tue</text>
+    <text x="330" y="370" text-anchor="middle">Wed</text>
+    <text x="348" y="370" text-anchor="middle">Thu</text>
+    <text x="366" y="370" text-anchor="middle">Fri</text>
+    <text x="384" y="370" text-anchor="middle">Sat</text>
+    <text x="402" y="370" text-anchor="middle">Today</text>
+    <text x="420" y="370" text-anchor="middle">&#x2192;</text>
+  </g>
+  <!-- Today highlight -->
+  <text x="440" y="344" fill="#0A84FF" font-family="monospace" font-size="9" font-weight="bold" opacity="0.7">6.2h</text>
+  <text x="468" y="344" fill="rgba(53,184,255,0.35)" font-family="monospace" font-size="7">/ 8h</text>
+  <!-- Status -->
+  <text x="196" y="365" fill="rgba(0,200,248,0.3)" font-family="monospace" font-size="6.5">
+    <tspan fill="#28C840" opacity="0.7">&#x25CF;</tspan> System Online &#x2022; 4 drones &#x2022; Hyderabad Ops Center
+  </text>
+</svg>

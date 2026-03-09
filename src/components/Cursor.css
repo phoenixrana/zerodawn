@@ -1,0 +1,93 @@
+/* ─────────────────────────────────────────
+   Cursor.css — Custom animated cursor
+   Accent: #00C8F8 (Hyscend teal)
+───────────────────────────────────────── */
+
+/* Hide native cursor when .has-cursor is applied to <html> */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+
+/* ── Base circle ── */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+
+  /* Visual */
+  border: 2px solid #00C8F8;
+  border-radius: 50%;
+  background: transparent;
+
+  /* Keep it above everything, never intercept events */
+  z-index: 99999;
+  pointer-events: none;
+
+  /* Start invisible; JS fades it in on first mouse move */
+  opacity: 0;
+
+  /* Blend mode so it stays legible on any background color */
+  mix-blend-mode: difference;
+
+  /* GPU layer hint */
+  will-change: transform, width, height, opacity, border-color, background-color;
+
+  /* Smooth property transitions (size, color, opacity).
+     Transform is handled entirely by GSAP — no CSS transition on transform
+     to avoid fighting the GSAP tween. */
+  transition:
+    width 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease,
+    border-color 0.25s ease,
+    background-color 0.25s ease;
+
+  /* Center the circle on the pointer hot-spot */
+  transform: translate(-50%, -50%);
+}
+
+/* ── Interactive element hover state ── */
+.cursor--active {
+  width: 56px;
+  height: 56px;
+  border-width: 1px;
+  border-color: rgba(0, 200, 248, 0.8);
+  background-color: rgba(0, 200, 248, 0.15);
+  box-shadow: 0 0 30px rgba(0, 200, 248, 0.4), inset 0 0 15px rgba(0, 200, 248, 0.2);
+}
+
+/* ── Pressed / mousedown state ── */
+.cursor--pressed {
+  width: 14px;
+  height: 14px;
+  border-width: 4px;
+  border-color: rgba(0, 200, 248, 1);
+  background-color: transparent;
+  box-shadow: 0 0 20px rgba(0, 200, 248, 0.6);
+}
+
+/* ── Mouse has left the viewport ── */
+.cursor--hidden {
+  opacity: 0 !important;
+}
+
+/* ─────────────────────────────────────────
+   Touch / coarse-pointer devices:
+   Hide the custom cursor entirely.
+   The html.has-cursor class is also removed
+   by JS on touch devices, but this CSS rule
+   acts as an extra safety net.
+───────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  .cursor {
+    display: none !important;
+  }
+
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: auto !important;
+  }
+}
