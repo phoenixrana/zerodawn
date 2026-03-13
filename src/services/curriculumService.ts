@@ -1,19 +1,13 @@
 import { LESSONS } from "../data/lessons";
-import { LessonModule, TrainingProfile } from "../types";
+import type { LessonModule, TrainingProfile } from "../types";
 
 export function getNextLesson(profile: TrainingProfile): LessonModule {
   const completed = new Set(profile.completedLessons);
-  const candidates = LESSONS.filter((lesson) => !completed.has(lesson.id));
+  const remaining = LESSONS.filter((lesson) => !completed.has(lesson.id));
 
-  if (candidates.length === 0) {
+  if (remaining.length === 0) {
     return LESSONS[0];
   }
 
-  const targetDifficulty = profile.difficulty;
-  const matchingDifficulty = candidates.find((lesson) => lesson.difficulty === targetDifficulty);
-  if (matchingDifficulty) {
-    return matchingDifficulty;
-  }
-
-  return candidates[0];
+  return remaining.find((lesson) => lesson.difficulty === profile.difficulty) ?? remaining[0];
 }

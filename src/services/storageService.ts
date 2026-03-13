@@ -1,13 +1,12 @@
-import { StoredGame, TrainingProfile } from "../types";
+import type { StoredGame, TrainingProfile } from "../types";
 import { createDefaultProfile } from "./progressService";
 
 const PROFILE_KEY = "chess-coach-profile";
 const GAMES_KEY = "chess-coach-games";
 
 function safeParse<T>(value: string | null, fallback: T): T {
-  if (!value) {
-    return fallback;
-  }
+  if (!value) return fallback;
+
   try {
     return JSON.parse(value) as T;
   } catch {

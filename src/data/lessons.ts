@@ -1,4 +1,4 @@
-import { LessonModule } from "../types";
+import type { LessonModule } from "../types";
 
 export const LESSONS: LessonModule[] = [
   {
@@ -8,8 +8,8 @@ export const LESSONS: LessonModule[] = [
     difficulty: "beginner",
     objective: "Learn why central pawns and piece activity matter in the opening.",
     checklist: [
-      "Play a central pawn in first two moves",
-      "Develop at least two minor pieces before move 8",
+      "Play a central pawn in the first two moves",
+      "Develop two minor pieces before move 8",
       "Avoid moving the same piece repeatedly without a reason"
     ]
   },
@@ -21,8 +21,8 @@ export const LESSONS: LessonModule[] = [
     objective: "Build a habit of castling and reducing king exposure.",
     checklist: [
       "Castle by move 10",
-      "Do not push pawns near your king unless needed",
-      "Connect rooks before launching an attack"
+      "Do not weaken the king with unnecessary pawn pushes",
+      "Connect rooks before forcing play"
     ]
   },
   {
@@ -32,21 +32,21 @@ export const LESSONS: LessonModule[] = [
     difficulty: "beginner",
     objective: "Spot opportunities where one move attacks two targets.",
     checklist: [
-      "Check every move for checks, captures, threats",
+      "Scan for checks, captures, and threats",
       "Look for knight forks on king and queen",
-      "Verify your own pieces are not hanging"
+      "Verify your own pieces are defended"
     ]
   },
   {
-    id: "tactics-pins-and-skewers",
+    id: "tactics-pins",
     title: "Pins and Skewers",
     theme: "tactics",
     difficulty: "developing",
     objective: "Recognize line tactics that trap valuable pieces.",
     checklist: [
-      "Identify pieces behind defended targets",
-      "Use bishops/rooks/queen to pin defenders",
-      "Scan for tactical shots before trading"
+      "Identify pieces lined up on files or diagonals",
+      "Use bishops, rooks, and queen to pin defenders",
+      "Look for overloaded defenders before trading"
     ]
   },
   {
@@ -54,9 +54,9 @@ export const LESSONS: LessonModule[] = [
     title: "King and Pawn Basics",
     theme: "endgame",
     difficulty: "beginner",
-    objective: "Use opposition and king activity to convert pawn endings.",
+    objective: "Use opposition and king activity in simple pawn endings.",
     checklist: [
-      "Bring king toward center",
+      "Bring king toward the center",
       "Use opposition to gain key squares",
       "Calculate pawn races before pushing"
     ]
@@ -66,10 +66,10 @@ export const LESSONS: LessonModule[] = [
     title: "Simple Rook Endgames",
     theme: "endgame",
     difficulty: "intermediate",
-    objective: "Prioritize active rook placement and passed pawn support.",
+    objective: "Prioritize rook activity and support of passed pawns.",
     checklist: [
-      "Put rook behind passed pawn",
-      "Keep king active",
+      "Put the rook behind the passed pawn",
+      "Activate the king early",
       "Avoid passive rook defense"
     ]
   }

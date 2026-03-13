@@ -1,7 +1,6 @@
-import { useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Text } from "@react-three/drei";
-import { BoardPiece } from "../types";
+import type { BoardPiece } from "../types";
 
 interface ChessBoard3DProps {
   pieces: BoardPiece[];
@@ -31,9 +30,7 @@ const PIECE_LABEL: Record<string, string> = {
 function squareToPosition(square: string): [number, number, number] {
   const file = FILES.indexOf(square[0]);
   const rank = RANKS.indexOf(square[1]);
-  const x = file - 3.5;
-  const z = rank - 3.5;
-  return [x, 0, z];
+  return [file - 3.5, 0, 3.5 - rank];
 }
 
 function SquareTile({
@@ -49,56 +46,64 @@ function SquareTile({
   target: boolean;
   onClick: (square: string) => void;
 }) {
-  const color = selected ? "#f6c453" : target ? "#68d391" : dark ? "#9e6b47" : "#f3dfc1";
   const [x, , z] = squareToPosition(square);
+  const color = selected ? "#f7b944" : target ? "#8cd6a6" : dark ? "#876041" : "#f1e0c8";
 
   return (
-    <mesh position={[x, -0.1, z]} onClick={() => onClick(square)} receiveShadow>
-      <boxGeometry args={[1, 0.2, 1]} />
+    <mesh position={[x, -0.08, z]} onClick={() => onClick(square)} receiveShadow>
+      <boxGeometry args={[1, 0.16, 1]} />
       <meshStandardMaterial color={color} />
     </mesh>
   );
 }
 
-function PieceMesh({ piece, onClick }: { piece: BoardPiece; onClick: (square: string) => void }) {
+function PieceMesh({
+  piece,
+  onClick
+}: {
+  piece: BoardPiece;
+  onClick: (square: string) => void;
+}) {
   const [x, , z] = squareToPosition(piece.square);
-  const color = piece.color === "w" ? "#fff9f0" : "#1e293b";
-  const textColor = piece.color === "w" ? "#1f2937" : "#f8fafc";
+  const fill = piece.color === "w" ? "#fbfaf7" : "#16202f";
+  const text = piece.color === "w" ? "#16202f" : "#fbfaf7";
 
   return (
-    <group position={[x, 0.32, z]} onClick={() => onClick(piece.square)}>
+    <group position={[x, 0.35, z]} onClick={() => onClick(piece.square)}>
       <mesh castShadow>
-        <cylinderGeometry args={[0.28, 0.38, 0.6, 32]} />
-        <meshStandardMaterial color={color} />
+        <cylinderGeometry args={[0.24, 0.38, 0.7, 28]} />
+        <meshStandardMaterial color={fill} metalness={0.15} roughness={0.4} />
       </mesh>
-      <Text position={[0, 0.08, 0]} fontSize={0.22} color={textColor} anchorX="center" anchorY="middle">
+      <Text position={[0, 0.1, 0]} fontSize={0.22} color={text} anchorX="center" anchorY="middle">
         {PIECE_LABEL[`${piece.color}${piece.type}`]}
       </Text>
     </group>
   );
 }
 
-export function ChessBoard3D({ pieces, legalTargets, selectedSquare, onSquareClick }: ChessBoard3DProps) {
-  const tiles = useMemo(() => {
-    const list: Array<{ square: string; dark: boolean }> = [];
-    for (let rank = 8; rank >= 1; rank -= 1) {
-      for (let file = 0; file < 8; file += 1) {
-        const square = `${FILES[file]}${rank}`;
-        const dark = (file + rank) % 2 === 0;
-        list.push({ square, dark });
-      }
+export function ChessBoard3D({
+  pieces,
+  legalTargets,
+  selectedSquare,
+  onSquareClick
+}: ChessBoard3DProps) {
+  const tiles = [];
+
+  for (let rank = 8; rank >= 1; rank -= 1) {
+    for (let file = 0; file < 8; file += 1) {
+      const square = `${FILES[file]}${rank}`;
+      tiles.push({ square, dark: (file + rank) % 2 === 0 });
     }
-    return list;
-  }, []);
+  }
 
   return (
-    <Canvas camera={{ position: [0, 8.5, 8.5], fov: 45 }} shadows>
-      <color attach="background" args={["#f7f4ec"]} />
-      <ambientLight intensity={0.65} />
-      <directionalLight castShadow intensity={1.1} position={[8, 12, 6]} />
-      <mesh position={[0, -0.4, 0]} receiveShadow>
+    <Canvas camera={{ position: [0, 8.5, 8.5], fov: 44 }} shadows>
+      <color attach="background" args={["#efe6d7"]} />
+      <ambientLight intensity={0.7} />
+      <directionalLight castShadow intensity={1.15} position={[8, 12, 6]} />
+      <mesh position={[0, -0.34, 0]} receiveShadow>
         <boxGeometry args={[9.4, 0.5, 9.4]} />
-        <meshStandardMaterial color="#8b5e3b" />
+        <meshStandardMaterial color="#5b4635" />
       </mesh>
 
       {tiles.map((tile) => (
@@ -113,10 +118,14 @@ export function ChessBoard3D({ pieces, legalTargets, selectedSquare, onSquareCli
       ))}
 
       {pieces.map((piece) => (
-        <PieceMesh key={`${piece.square}-${piece.type}-${piece.color}`} piece={piece} onClick={onSquareClick} />
+        <PieceMesh
+          key={`${piece.square}-${piece.type}-${piece.color}`}
+          piece={piece}
+          onClick={onSquareClick}
+        />
       ))}
 
-      <OrbitControls enablePan={false} minDistance={7} maxDistance={14} maxPolarAngle={Math.PI / 2.1} />
+      <OrbitControls enablePan={false} minDistance={7} maxDistance={14} maxPolarAngle={Math.PI / 2.15} />
     </Canvas>
   );
 }

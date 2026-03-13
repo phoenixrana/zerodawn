@@ -1,4 +1,4 @@
-import { Color, PieceSymbol, Square } from "chess.js";
+import type { Color, PieceSymbol, Square } from "chess.js";
 
 export type DifficultyBand = "beginner" | "developing" | "intermediate";
 
