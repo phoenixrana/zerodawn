@@ -726,11 +726,11 @@ export default function App() {
           <a href="#hero" className="nav-logo" onClick={(e) => { e.preventDefault(); scrollTo('hero') }}>HYSCEND</a>
           <ul className={`nav-links${mobileMenuOpen ? ' open' : ''}`} role="menubar">
             <li role="none"><a role="menuitem" href="#hero" data-section="hero" onClick={(e) => { e.preventDefault(); scrollTo('hero') }}>Home</a></li>
-            <li role="none"><a role="menuitem" href="#mission" data-section="mission" onClick={(e) => { e.preventDefault(); scrollTo('mission') }}>Mission</a></li>
-            <li role="none"><a role="menuitem" href="#uptime" data-section="uptime" onClick={(e) => { e.preventDefault(); scrollTo('uptime') }}>The System</a></li>
-            <li role="none"><a role="menuitem" href="#fleetos" data-section="fleetos" onClick={(e) => { e.preventDefault(); scrollTo('fleetos') }}>FleetOS</a></li>
-            <li role="none"><a role="menuitem" href="#industries" data-section="industries" onClick={(e) => { e.preventDefault(); scrollTo('industries') }}>Industries</a></li>
-            <li role="none"><a role="menuitem" href="#contact" data-section="contact" onClick={(e) => { e.preventDefault(); scrollTo('contact') }} className="nav-cta">Get In Touch</a></li>
+            <li role="none"><a role="menuitem" href="#mission" data-section="mission" aria-label="Hydrogen drone mission and value proposition" onClick={(e) => { e.preventDefault(); scrollTo('mission') }}>Mission</a></li>
+            <li role="none"><a role="menuitem" href="#uptime" data-section="uptime" aria-label="Hydrogen drone uptime system — aircraft, RefuelPod, SOPs, FleetOS" onClick={(e) => { e.preventDefault(); scrollTo('uptime') }}>The System</a></li>
+            <li role="none"><a role="menuitem" href="#fleetos" data-section="fleetos" aria-label="FleetOS drone fleet management software" onClick={(e) => { e.preventDefault(); scrollTo('fleetos') }}>FleetOS</a></li>
+            <li role="none"><a role="menuitem" href="#industries" data-section="industries" aria-label="Drone inspection industries served — power, oil and gas, solar, mining" onClick={(e) => { e.preventDefault(); scrollTo('industries') }}>Industries</a></li>
+            <li role="none"><a role="menuitem" href="#contact" data-section="contact" aria-label="Contact Hyscend hydrogen drone team" onClick={(e) => { e.preventDefault(); scrollTo('contact') }} className="nav-cta">Get In Touch</a></li>
           </ul>
           <button className="nav-hamburger" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileMenuOpen}>
             {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
