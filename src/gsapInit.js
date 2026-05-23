@@ -1,7 +1,6 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'
 import { CustomEase } from 'gsap/CustomEase'
 import Lenis from 'lenis'
@@ -10,7 +9,6 @@ import 'lenis/dist/lenis.css'
 gsap.registerPlugin(
   ScrollTrigger,
   SplitText,
-  DrawSVGPlugin,
   ScrambleTextPlugin,
   CustomEase
 )
@@ -39,10 +37,15 @@ function initLenis() {
   // Sync Lenis scroll position with ScrollTrigger
   lenisInstance.on('scroll', ScrollTrigger.update)
 
-  // Drive Lenis from GSAP ticker for perfect frame sync
-  gsap.ticker.add((time) => {
-    lenisInstance.raf(time * 1000)
-  })
+  // Drive Lenis from GSAP ticker for perfect frame sync.
+  // Capture the wrapper so destroyLenis can actually remove it — passing
+  // `lenisInstance.raf` directly to gsap.ticker.remove() never matched the
+  // anonymous wrapper that was added, leaking a closure on every init.
+  const rafCallback = (time) => {
+    if (lenisInstance) lenisInstance.raf(time * 1000)
+  }
+  lenisInstance._gsapRaf = rafCallback
+  gsap.ticker.add(rafCallback)
   gsap.ticker.lagSmoothing(0)
 
   return lenisInstance
@@ -54,10 +57,10 @@ function getLenis() {
 
 function destroyLenis() {
   if (lenisInstance) {
-    gsap.ticker.remove(lenisInstance.raf)
+    if (lenisInstance._gsapRaf) gsap.ticker.remove(lenisInstance._gsapRaf)
     lenisInstance.destroy()
     lenisInstance = null
   }
 }
 
-export { gsap, ScrollTrigger, SplitText, DrawSVGPlugin, ScrambleTextPlugin, initLenis, getLenis, destroyLenis }
+export { gsap, ScrollTrigger, SplitText, ScrambleTextPlugin, initLenis, getLenis, destroyLenis }

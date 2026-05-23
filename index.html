@@ -28,6 +28,17 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="apple-touch-icon" href="/vite.svg" />
 
+    <!-- LCP candidate: hero drone — preload the responsive WebP set so the largest
+         visible element starts loading during HTML parse instead of after JSX mount. -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      imagesrcset="/images/responsive/hero-drone-640w.webp 640w, /images/responsive/hero-drone-1024w.webp 1024w, /images/hero-drone.webp 1600w"
+      imagesizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 100vw"
+      fetchpriority="high"
+    />
+
     <!-- Google Fonts — preconnect + preload critical display font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

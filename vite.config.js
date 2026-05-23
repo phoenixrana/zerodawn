@@ -8,7 +8,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'gsap': ['gsap', 'gsap/ScrollTrigger', 'gsap/ScrollSmoother', 'gsap/SplitText', 'gsap/DrawSVGPlugin', 'gsap/ScrambleTextPlugin', 'gsap/CustomEase'],
+          'gsap': ['gsap', 'gsap/ScrollTrigger', 'gsap/SplitText', 'gsap/ScrambleTextPlugin', 'gsap/CustomEase'],
         },
       },
     },

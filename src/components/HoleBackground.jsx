@@ -1,5 +1,4 @@
 import { useRef, useEffect, useCallback } from 'react'
-import { motion } from 'framer-motion'
 
 export default function HoleBackground({
   strokeColor = '#00C8F8',

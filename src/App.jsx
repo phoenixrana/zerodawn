@@ -1,9 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { gsap, ScrollTrigger, SplitText, ScrambleTextPlugin, initLenis, getLenis, destroyLenis } from './gsapInit'
+import { gsap, ScrollTrigger, SplitText, initLenis, getLenis, destroyLenis } from './gsapInit'
 import Cursor from './components/Cursor'
 import HyscendLoader from './components/HyscendLoader'
-// Parallax component available but not currently used
 import {
   Zap, Fuel, PlugZap,
   MapPin, Mail, Phone, ArrowRight, Menu, X,
@@ -15,10 +13,8 @@ import {
   Weight, Thermometer, Wind, BadgeCheck,
   ClipboardCheck, Package
 } from 'lucide-react'
-import ShinyText from './components/ShinyText'
 import HoleBackground from './components/HoleBackground'
 import ResponsiveImage from './components/ResponsiveImage'
-import useResponsive from './hooks/useResponsive'
 import fleetosDashSvg from './assets/svg/fleetos-dashboard.svg'
 import './App.css'
 
@@ -87,7 +83,6 @@ export default function App() {
   })
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [formStatus, setFormStatus] = useState('idle') // idle | sending | sent | error
-  const responsive = useResponsive()
 
   // Disable browser scroll restoration — always start at top after loader
   useEffect(() => {
@@ -957,6 +952,11 @@ export default function App() {
               <div className="contact-wrapper">
                 <form className="contact-form" onSubmit={async (e) => {
                   e.preventDefault()
+                  // Honeypot anti-spam — real users leave this empty
+                  if (e.target._honey && e.target._honey.value) {
+                    setFormStatus('sent')   // silently accept-then-drop
+                    return
+                  }
                   setFormStatus('sending')
                   const form = e.target
                   try {
@@ -969,6 +969,7 @@ export default function App() {
                         phone: form.phone.value,
                         message: form.message.value,
                         _subject: 'Hyscend — New Contact Form Submission',
+                        _replyto: form.email.value,
                       }),
                     })
                     if (res.ok) {
@@ -981,7 +982,8 @@ export default function App() {
                     setFormStatus('error')
                   }
                 }}>
-                  <input type="hidden" name="_captcha" value="false" />
+                  {/* Honeypot field — hidden from real users, attractive to bots */}
+                  <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }} />
                   <div className="form-group">
                     <label htmlFor="name">Name <span aria-hidden="true">*</span></label>
                     <input id="name" name="name" className="form-input" type="text" placeholder="Your name" required aria-required="true" />
