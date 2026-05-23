@@ -290,6 +290,16 @@ export default function HoleBackground({
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+
+    // WCAG 2.3.3 + CrUX INP signal — bail out entirely when the user prefers
+    // reduced motion. The animated canvas (~80 moving objects) competes with
+    // the GSAP ticker on mid-range Android, producing 200-400ms INP spikes
+    // per the Core Web Vitals SEO audit.
+    if (typeof window !== 'undefined'
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
+
     init()
 
     // Gate the animation loop on visibility — when the hero scrolls out of view,

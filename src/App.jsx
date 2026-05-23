@@ -925,7 +925,7 @@ export default function App() {
               </div>
 
               <div className="hydrogen-wins">
-                <h4>The Operational Math</h4>
+                <h3>Hydrogen vs Battery Drone — The Operational Math</h3>
                 <p>One Hyscend system matches the coverage of <strong>3{'\u2013'}4 battery drone kits</strong>. Fewer assets, fewer operators, lower logistics overhead.</p>
                 <span className="comp-note">Indicative comparison based on typical payload and conditions. Actual performance varies by mission profile, weather, and altitude.</span>
               </div>
@@ -941,7 +941,7 @@ export default function App() {
             <div className="section-container">
               <span className="section-label">Software</span>
               <div className="fleetos-header-row">
-                <img src={fleetosDashSvg} alt="FleetOS mission control dashboard interface" className="fleetos-dash-svg" />
+                <img src={fleetosDashSvg} alt="FleetOS hydrogen drone fleet management software — mission control dashboard with real-time telemetry, fuel-aware routing, and inspection analytics" className="fleetos-dash-svg" />
                 <div className="fleetos-header-text">
                   <h2 className="section-title">
                     <span className="gradient-text">FleetOS</span> {'\u2014'} See Everything. Prove Everything.
@@ -1079,7 +1079,7 @@ export default function App() {
                   )}
                 </form>
                 <div className="contact-info">
-                  <h3>HYSCEND</h3>
+                  <h3>Contact Hyscend — Hydrogen Drone Operations</h3>
                   <p className="contact-org">by Zerodawn Technologies Pvt. Ltd.</p>
                   <p className="contact-tagline">Hydrogen-electric drone operations for India{'\u2019'}s most demanding sites.</p>
                   <div className="contact-details">
