@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Block known LLM-content-scrapers if you do not want training reuse (uncomment to enforce):
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+# User-agent: Google-Extended
+# Disallow: /
+
+Sitemap: https://hyscend.com/sitemap.xml

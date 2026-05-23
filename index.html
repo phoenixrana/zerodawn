@@ -1,16 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
+    <!-- Canonical + hreflang (India-targeted single-locale site) -->
+    <link rel="canonical" href="https://hyscend.com/" />
+    <link rel="alternate" hreflang="en-in" href="https://hyscend.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://hyscend.com/" />
+
     <!-- SEO -->
     <title>Hyscend — Hydrogen Drone Uptime System for Industrial Inspection | Zero Dawn Technologies</title>
     <meta name="description" content="Hyscend: the end-to-end hydrogen drone system for industrial inspection and surveillance. 2+ hour flights, under 5-minute refuel, zero flight emissions. Built for India's harshest environments." />
-    <meta name="keywords" content="hydrogen drone, fuel cell drone, long endurance UAV, Hyscend, ZeroDawn, commercial drone, hydrogen fuel cell, drone inspection, FleetOS, RefuelPod" />
     <meta name="author" content="Zero Dawn Technologies" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="theme-color" content="#080808" />
+    <meta name="geo.region" content="IN" />
+    <meta name="geo.placename" content="Hyderabad, Telangana, India" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Hyscend — Hydrogen-Powered Drone Uptime System" />
@@ -18,13 +24,21 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Hyscend" />
     <meta property="og:locale" content="en_IN" />
+    <meta property="og:url" content="https://hyscend.com/" />
+    <meta property="og:image" content="https://hyscend.com/images/hero-drone.webp" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="1067" />
+    <meta property="og:image:alt" content="Hyscend hydrogen-electric drone in industrial inspection flight" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ZeroDawnTech" />
     <meta name="twitter:title" content="Hyscend — Hydrogen-Powered Drone Uptime System" />
     <meta name="twitter:description" content="End-to-end hydrogen drone operations: RefuelPod + Safety SOPs + FleetOS. 2+ hour flights, 5-min refuel, zero emissions." />
+    <meta name="twitter:image" content="https://hyscend.com/images/hero-drone.webp" />
+    <meta name="twitter:image:alt" content="Hyscend hydrogen-electric drone in industrial inspection flight" />
 
-    <!-- Favicon -->
+    <!-- Favicon — TODO replace /vite.svg placeholder with branded favicon set -->
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="apple-touch-icon" href="/vite.svg" />
 
@@ -44,6 +58,113 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" as="style" />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- ──────── Structured Data (schema.org JSON-LD) ──────── -->
+    <!-- Organization — unlocks Google Knowledge Panel on brand queries -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://hyscend.com/#organization",
+      "name": "Zerodawn Technologies Pvt. Ltd.",
+      "alternateName": "Hyscend",
+      "url": "https://hyscend.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hyscend.com/images/hero-drone.webp",
+        "width": 1600,
+        "height": 1067
+      },
+      "description": "End-to-end hydrogen drone uptime system for industrial inspection and surveillance. 2-3 hour flights, sub-5-minute refuel, zero point-of-use emissions. Built for India's harshest environments.",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Hyderabad, Telangana, India"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+      },
+      "email": "info@zerodawn.in",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "info@zerodawn.in",
+        "areaServed": "IN",
+        "availableLanguage": ["English", "Hindi"]
+      },
+      "award": [
+        "DPIIT Startup India Recognised",
+        "MSME Registered",
+        "DGCA Certified"
+      ],
+      "knowsAbout": [
+        "Hydrogen fuel cell drones",
+        "Industrial UAV inspection",
+        "Green Hydrogen Mission India",
+        "Long-endurance unmanned aerial vehicles",
+        "Drone fleet management software"
+      ],
+      "sameAs": []
+    }
+    </script>
+
+    <!-- WebSite — canonical identity + sitelinks eligibility -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://hyscend.com/#website",
+      "name": "Hyscend",
+      "url": "https://hyscend.com/",
+      "description": "Hydrogen-powered industrial drone uptime system for inspection and surveillance — built for India's harshest environments.",
+      "publisher": { "@id": "https://hyscend.com/#organization" },
+      "inLanguage": "en-IN"
+    }
+    </script>
+
+    <!-- ProfessionalService + Service catalog — local-pack + service rich result -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://hyscend.com/#localbusiness",
+      "name": "Zerodawn Technologies Pvt. Ltd.",
+      "alternateName": "Hyscend",
+      "url": "https://hyscend.com/",
+      "email": "info@zerodawn.in",
+      "image": "https://hyscend.com/images/hero-drone.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hyderabad",
+        "addressRegion": "Telangana",
+        "addressCountry": "IN"
+      },
+      "areaServed": { "@type": "Country", "name": "India" },
+      "serviceType": "Industrial Drone Inspection",
+      "priceRange": "Contact for pricing",
+      "currenciesAccepted": "INR",
+      "paymentAccepted": "Invoice",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Hyscend Hydrogen Drone Uptime System",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Long-Endurance Hydrogen Aircraft", "description": "2-3 hour sorties, 4-6+ hours daily. One aircraft, multiple sites." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "RefuelPod Swap Station", "description": "Sub-5-minute cylinder swaps with safety interlocks. Hydrogen supply chain managed." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Safety SOPs and Training", "description": "DGCA-compliant SOPs, checklists, and incident playbooks. Team trained and certified." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Service and Maintenance", "description": "Preventive schedules, on-site spares, replaceable modules. Response SLA included." } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "FleetOS Software", "description": "Fleet visibility, automated checks, fuel-aware routing, one-click mission reports." } }
+        ]
+      },
+      "hasCredential": [
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "DPIIT Startup India Recognised", "recognizedBy": { "@type": "GovernmentOrganization", "name": "Department for Promotion of Industry and Internal Trade", "url": "https://dpiit.gov.in" } },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "MSME Registered", "recognizedBy": { "@type": "GovernmentOrganization", "name": "Ministry of Micro, Small and Medium Enterprises", "url": "https://msme.gov.in" } },
+        { "@type": "EducationalOccupationalCredential", "credentialCategory": "certification", "name": "DGCA Certified", "recognizedBy": { "@type": "GovernmentOrganization", "name": "Directorate General of Civil Aviation", "url": "https://dgca.gov.in" } }
+      ],
+      "sameAs": []
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

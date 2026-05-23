@@ -29,9 +29,12 @@ function initLenis() {
   lenisInstance = new Lenis({
     lerp: 0.07,
     smoothWheel: true,
-    syncTouch: true,
-    syncTouchLerp: 0.04,
-    touchInertiaMultiplier: 25,
+    // Native touch scroll on mobile — Lenis syncTouch:true intercepts every
+    // touchmove through rAF and competes with the GSAP ticker, causing INP
+    // spikes (200-400ms) on mid-range Android per the perf review and the
+    // Core Web Vitals SEO audit. Letting the browser handle touch keeps the
+    // hero/deck scroll smooth and clears CrUX page-experience signal.
+    syncTouch: false,
   })
 
   // Sync Lenis scroll position with ScrollTrigger
