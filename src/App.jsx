@@ -133,6 +133,33 @@ export default function App() {
     e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
   }, [])
 
+  // Keyboard a11y for the scroll-jacked card deck (WCAG 2.1.1 critical from the
+  // a11y review): when focus enters a deck-card that is currently translated
+  // off-screen, scroll the deck to that card so the focused element becomes
+  // visible. Without this, Tab navigation lands on invisible content.
+  useEffect(() => {
+    const deck = document.querySelector('.card-deck')
+    if (!deck) return
+    const sectionIds = ['hero', 'mission', 'uptime', 'comparison', 'fleetos', 'industries', 'contact']
+
+    const handleFocusIn = (e) => {
+      const card = e.target.closest('.deck-card')
+      if (!card) return
+      const id = card.id || card.dataset.section
+      if (!id || !sectionIds.includes(id)) return
+      // Only react if the focused card isn't already on-screen
+      const rect = card.getBoundingClientRect()
+      const onScreen = rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4
+      if (!onScreen) scrollTo(id)
+    }
+
+    document.addEventListener('focusin', handleFocusIn)
+    return () => document.removeEventListener('focusin', handleFocusIn)
+    // scrollTo is closed-over but its identity is stable enough — re-binding
+    // on every render would tear down the listener on every key press.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const scrollTo = (id) => {
     setMobileMenuOpen(false)
     const cardOrder = ['hero', 'mission', 'uptime', 'comparison', 'fleetos', 'industries', 'contact']
@@ -673,7 +700,18 @@ export default function App() {
         <div id="smooth-content">
 
         {/* ──────── SKIP NAV ──────── */}
-        <a href="#hero" className="skip-nav" onClick={(e) => { e.preventDefault(); scrollTo('hero') }}>
+        <a href="#hero" className="skip-nav" onClick={(e) => {
+          e.preventDefault()
+          // WCAG 2.4.1 (G1 technique): move keyboard focus to the target,
+          // not just scroll. Without setting tabIndex + focus(), the next
+          // Tab keystroke jumps back to the navbar instead of into the hero.
+          const heroEl = document.getElementById('hero')
+          if (heroEl) {
+            heroEl.setAttribute('tabindex', '-1')
+            heroEl.focus({ preventScroll: true })
+          }
+          scrollTo('hero')
+        }}>
           Skip to content
         </a>
 

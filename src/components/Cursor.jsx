@@ -56,10 +56,22 @@ export default function Cursor() {
   const [shouldRender, setShouldRender] = useState(false)
 
   useEffect(() => {
-    /* Only activate on desktop (hover-capable, fine pointer) */
-    if (!isTouchDevice) {
-      setShouldRender(true)
-    }
+    /* Skip on touch devices (no hover, no fine pointer) */
+    if (isTouchDevice) return
+
+    /* Skip when user prefers reduced motion — the custom cursor hides the
+       native pointer globally, which is a WCAG 2.4.7 / 1.4.11 blocker for
+       low-vision and magnifier users. Honor the OS-level preference. */
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (reducedMotion.matches) return
+    setShouldRender(true)
+
+    /* React to a mid-session preference flip — e.g. user toggles the OS
+       setting; tear down via shouldRender=false (cleanup restores the
+       native cursor) and re-mount if they flip back. */
+    const onChange = (e) => setShouldRender(!e.matches && !isTouchDevice)
+    reducedMotion.addEventListener('change', onChange)
+    return () => reducedMotion.removeEventListener('change', onChange)
   }, [])
 
   /* ─── Helpers: class toggles ─── */
