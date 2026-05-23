@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Env
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -23,3 +28,23 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Test + coverage artifacts
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.cache/
+
+# Debug screenshots + scratch artifacts at repo root (tooling review §1)
+/screenshot-*.png
+/hero-*.png
+/hero-*.jpg
+/stitch_downloads/
+
+# Internal docs that don't belong with the deployed source
+/MOBILE_RESPONSIVE_RESEARCH.md
+
+# Local agent / session state
+.claude-flow/
+.omc/
