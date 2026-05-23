@@ -867,7 +867,7 @@ export default function App() {
               <div className="uptime-grid">
                 {UPTIME_BLOCKS.map((b) => (
                   <div key={b.num} className="uptime-block" onMouseMove={handleCardMouseMove}>
-                    <ResponsiveImage src={b.bg} alt="" className="uptime-bg" ariaHidden="true" loading="lazy" width="400" height="300" />
+                    <ResponsiveImage src={b.bg} alt="" className="uptime-bg" ariaHidden="true" loading="lazy" width="400" height="300" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                     <div className="uptime-block-content">
                       <div className="uptime-block-header">
                         <div className="uptime-num">{b.num}</div>
@@ -976,7 +976,7 @@ export default function App() {
               <div className="industries-grid">
                 {INDUSTRIES.map((ind) => (
                   <div key={ind.title} className="industry-card" onMouseMove={handleCardMouseMove}>
-                    <ResponsiveImage src={ind.bg} alt="" className="industry-bg" ariaHidden="true" loading="lazy" width="400" height="300" />
+                    <ResponsiveImage src={ind.bg} alt="" className="industry-bg" ariaHidden="true" loading="lazy" width="400" height="300" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                     <div className="industry-card-content">
                       <div className="industry-icon"><ind.icon size={24} strokeWidth={1.8} /></div>
                       <h3>{ind.title}</h3>
