@@ -53,11 +53,9 @@
       fetchpriority="high"
     />
 
-    <!-- Google Fonts — preconnect + preload critical display font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" as="style" />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <!-- Fonts are self-hosted via @fontsource/* imports in src/main.jsx.
+         No third-party stylesheet, no DNS lookup, no render-blocking CSS link.
+         Each weight has font-display: swap baked into its @font-face rule. -->
 
     <!-- ──────── Structured Data (schema.org JSON-LD) ──────── -->
     <!-- Organization — unlocks Google Knowledge Panel on brand queries -->
