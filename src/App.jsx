@@ -930,9 +930,9 @@ export default function App() {
                 <span className="comp-note">Indicative comparison based on typical payload and conditions. Actual performance varies by mission profile, weather, and altitude.</span>
               </div>
 
-              <button className="section-cta" onClick={() => scrollTo('contact')}>
-                See the Math for Your Site <ArrowRight size={16} />
-              </button>
+              <a href="#contact" className="section-cta" onClick={(e) => { e.preventDefault(); scrollTo('contact') }}>
+                See the Hydrogen Drone ROI for Your Site <ArrowRight size={16} aria-hidden="true" />
+              </a>
             </div>
           </section>
 
@@ -964,9 +964,9 @@ export default function App() {
                 <FLEETOS_HIGHLIGHT.icon size={18} />
                 <span>{FLEETOS_HIGHLIGHT.text}</span>
               </div>
-              <button className="section-cta" onClick={() => scrollTo('contact')}>
-                Request a Demo <ArrowRight size={16} />
-              </button>
+              <a href="#contact" className="section-cta" onClick={(e) => { e.preventDefault(); scrollTo('contact') }}>
+                Request a FleetOS Hydrogen Drone Demo <ArrowRight size={16} aria-hidden="true" />
+              </a>
             </div>
           </section>
 
@@ -993,9 +993,9 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <button className="section-cta" onClick={() => scrollTo('contact')}>
-                Discuss Your Use Case <ArrowRight size={16} />
-              </button>
+              <a href="#contact" className="section-cta" onClick={(e) => { e.preventDefault(); scrollTo('contact') }}>
+                Discuss Your Drone Inspection Use Case <ArrowRight size={16} aria-hidden="true" />
+              </a>
             </div>
           </section>
 
@@ -1100,20 +1100,22 @@ export default function App() {
                   <div className="trust-strip">
                     <span className="trust-strip-label">Recognised by</span>
                     <div className="trust-logos">
-                      <div className="trust-logo">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <a className="trust-logo" href="https://startupindia.gov.in" target="_blank" rel="noopener noreferrer"
+                         aria-label="DPIIT Startup India recognition — opens startupindia.gov.in in a new tab">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
                           <circle cx="12" cy="12" r="10" />
                           <path d="M8 12l3 3 5-6" />
                         </svg>
                         <span>DPIIT Startup India</span>
-                      </div>
-                      <div className="trust-logo">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      </a>
+                      <a className="trust-logo" href="https://udyamregistration.gov.in" target="_blank" rel="noopener noreferrer"
+                         aria-label="MSME Udyam registration — opens udyamregistration.gov.in in a new tab">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
                           <rect x="3" y="6" width="18" height="12" rx="2" />
                           <path d="M7 12h10M12 9v6" />
                         </svg>
                         <span>MSME Registered</span>
-                      </div>
+                      </a>
                     </div>
                   </div>
                 </div>
