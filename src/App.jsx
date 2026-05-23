@@ -79,10 +79,25 @@ const INDUSTRIES = [
    ═══════════════════════════════════ */
 export default function App() {
   const [loading, setLoading] = useState(() => {
-    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    // Skip the 3.8s loader if the user prefers reduced motion OR has already seen
+    // it this session — biggest LCP win from the perf review, no behavior loss
+    // for first-time visitors.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
+    try {
+      if (sessionStorage.getItem('hyscend-loaded') === '1') return false
+    } catch { /* sessionStorage unavailable (private mode etc) — fall through */ }
+    return true
   })
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [formStatus, setFormStatus] = useState('idle') // idle | sending | sent | error
+
+  // Mark the loader as seen as soon as the app has handed off — repeat visits in
+  // this tab session render straight into the hero without the 3.8s gate.
+  useEffect(() => {
+    if (!loading) {
+      try { sessionStorage.setItem('hyscend-loaded', '1') } catch { /* no-op */ }
+    }
+  }, [loading])
 
   // Disable browser scroll restoration — always start at top after loader
   useEffect(() => {

@@ -7,6 +7,14 @@
  *   /images/responsive/{name}-640w.webp     — 640px wide
  *   /images/responsive/{name}-1024w.webp    — 1024px wide
  */
+/**
+ * Default `sizes` matches a full-width hero. For thumbnail tiles (uptime/industry
+ * cards rendering at ~400px wide), pass a tighter `sizes` so the browser doesn't
+ * pick the 1600w variant — that single fix cuts ~600 KB of wasted image transfer
+ * across the deck per the perf review.
+ */
+const DEFAULT_SIZES = '(max-width: 640px) 640px, (max-width: 1024px) 1024px, 100vw'
+
 export default function ResponsiveImage({
   src,
   alt = '',
@@ -16,9 +24,10 @@ export default function ResponsiveImage({
   loading = 'lazy',
   fetchPriority,
   ariaHidden,
+  sizes = DEFAULT_SIZES,
   ...rest
 }) {
-  // Derive base name and extension from src like "/images/hero-drone.png"
+  // Derive base name from src like "/images/hero-drone.png"
   const match = src.match(/\/images\/(.+)\.(jpg|jpeg|png)$/i)
   if (!match) {
     // Fallback: render plain img if path doesn't match expected pattern
@@ -26,7 +35,6 @@ export default function ResponsiveImage({
   }
 
   const baseName = match[1]
-  const ext = match[2]
 
   return (
     <picture>
@@ -34,7 +42,7 @@ export default function ResponsiveImage({
       <source
         type="image/webp"
         srcSet={`/images/responsive/${baseName}-640w.webp 640w, /images/responsive/${baseName}-1024w.webp 1024w, /images/${baseName}.webp 1600w`}
-        sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1600px"
+        sizes={sizes}
       />
       {/* Original format fallback */}
       <img

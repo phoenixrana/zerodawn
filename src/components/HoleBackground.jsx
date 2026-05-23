@@ -291,7 +291,42 @@ export default function HoleBackground({
     const canvas = canvasRef.current
     if (!canvas) return
     init()
-    tick()
+
+    // Gate the animation loop on visibility — when the hero scrolls out of view,
+    // pause the rAF entirely (perf review #3: HoleBackground was burning ~8 ms/frame
+    // even when display: none / opacity: 0 deeper in the deck).
+    let isIntersecting = true
+    const startTick = () => {
+      if (!animationFrameIdRef.current) tick()
+    }
+    const stopTick = () => {
+      if (animationFrameIdRef.current) {
+        cancelAnimationFrame(animationFrameIdRef.current)
+        animationFrameIdRef.current = 0
+      }
+    }
+    startTick()
+
+    let io
+    if (typeof IntersectionObserver !== 'undefined') {
+      io = new IntersectionObserver(
+        ([entry]) => {
+          isIntersecting = entry.isIntersecting
+          if (isIntersecting) startTick()
+          else stopTick()
+        },
+        { rootMargin: '50px' }
+      )
+      io.observe(canvas)
+    }
+
+    // Also pause when the tab is hidden — saves cycles on background tabs.
+    const handleVisibility = () => {
+      if (document.hidden) stopTick()
+      else if (isIntersecting) startTick()
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+
     const handleResize = () => {
       setSize()
       setDiscs()
@@ -301,7 +336,9 @@ export default function HoleBackground({
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
-      cancelAnimationFrame(animationFrameIdRef.current)
+      document.removeEventListener('visibilitychange', handleVisibility)
+      if (io) io.disconnect()
+      stopTick()
     }
   }, [init, tick, setSize, setDiscs, setLines, setParticles])
 
